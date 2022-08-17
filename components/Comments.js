@@ -4,9 +4,9 @@ import parse from 'html-react-parser';
 
 import { getComments } from '../services';
 
-const Comments = ({ slug }) => {
+const Comments = ({ slug, data }) => {
     const [comments, setComments] = useState([]);
-
+    console.log(data)
     useEffect(() => {
       getComments(slug)
             .then((result) => setComments(result))
@@ -37,6 +37,14 @@ const Comments = ({ slug }) => {
       )}
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      data : "s"
+    }, // will be passed to the page component as props
+  }
 }
 
 export default Comments
